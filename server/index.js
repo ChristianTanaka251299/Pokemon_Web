@@ -1,20 +1,24 @@
 const express = require("express");
 const { Sequelize } = require("sequelize");
+const cors = require("cors")
 const app = express();
 require("dotenv").config();
-const db = require("./models");
 const PORT = process.env.PORT;
+
+const { userRouters } = require("./routers")
 
 const sequelize = new Sequelize("pokemon_advance", "root", "password", {
     host: "localhost",
     dialect: "mysql",
   });
-
+app.use(express.json());
+app.use(cors());
 app.get("/", (req, res) => {
-  console.log("Here");
   res.sendStatus(500);
   res.send("Hi");
 });
+
+app.use("/user", userRouters)
 
 // db.sequelize.sync({ alter: true });
 
