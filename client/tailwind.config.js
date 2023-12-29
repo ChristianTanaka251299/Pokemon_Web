@@ -6,7 +6,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primaryBlue: "#2B3278"
+        primaryBlue: "#2B3278",
+        primaryYellow: "#E0B40B",
+        blackSoft: "#252525"
+      },
+      fontFamily: {
+        actor: ["Actor", "sans-serif"]
       }
     },
   },

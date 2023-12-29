@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
+
 @layer utilities {
   .container-screen{
     @apply mx-auto w-[85%] max-w-screen-xl;
   }
 
+  .header-text{
+    @apply text-blackSoft font-thin hover:text-slate-200 transition duration-200 text-xl active:text-primaryYellow
+  }
 }
