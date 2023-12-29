@@ -1,3 +1,4 @@
+const { uidGenerator } = require("../helper/uidGenerator")
 const { users } = require("../models");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
@@ -15,7 +16,10 @@ module.exports = {
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-
+    const lastRegister= await users.findOne({
+      order:[['createdAt', 'DESC']]
+    })
+    const generateUID = parseInt(uidGenerator(lastRegister.dataValues.id + 1))
     try {
       const [user, created] = await users.findOrCreate({
         where: {
@@ -25,10 +29,10 @@ module.exports = {
           first_name,
           last_name,
           gender,
-          password,
+          password: hashPassword,
           email,
           status: "Hello nice to meet you !",
-          uid: 1231531,
+          uid: generateUID,
           verify: false,
         },
       });
