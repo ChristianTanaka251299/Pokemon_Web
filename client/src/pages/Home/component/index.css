@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
+
+@layer utilities {
+
+  .chevron-button{
+    @apply text-primaryYellow transition duration-300 hover:bg-slate-800/10
+  }
+}
