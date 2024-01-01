@@ -4,6 +4,10 @@
 <p>I named it advance because I previously had also made a pokemon app but back then i was just still learn how to code.</p>
 <p>Now after 6 months of learning  I want to remake my old project but better</p>
 
+<h1>PROGRESS</h1>
+<p>This website is still under development. If you'd like to see its progress, you can click the link below</p>
+<a href="https://christiansandbox.online/">Visit website</a>
+
 <h1>Figma</h1>
 <p>Before start to code i usually create a design template using figma. Feel free to give any advice</p>
 <a href="https://www.figma.com/file/dJfAq74KqkfxvpT9dRaQaX/Pokemon?type=design&node-id=0%3A1&mode=design&t=axNxKixeufbSnixP-1">Click Here To see</a>
