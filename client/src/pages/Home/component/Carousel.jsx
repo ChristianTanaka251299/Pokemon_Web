@@ -31,7 +31,7 @@ const Carousel = ({ slides, slidesPC }) => {
           </div>
 
           <div
-            className="sm:flex transition-transform duration-500 ease-out hidden"
+            className="hidden transition-transform duration-500 ease-out sm:flex"
             style={{ transform: `translateX(-${curent * 100}%)` }}
           >
             {slidesPC.map((img) => (
@@ -42,19 +42,19 @@ const Carousel = ({ slides, slidesPC }) => {
           <div className="absolute inset-0 mx-2 flex items-center justify-between">
             <button
               onClick={prev}
-              className="chevron-button h-6 w-6 lg:h-10 lg:w-10 rounded-full p-1"
+              className="chevron-button h-6 w-6 rounded-full p-1 lg:h-10 lg:w-10"
             >
               <ChevronLeftIcon />
             </button>
             <button
               onClick={next}
-              className="chevron-button h-6 w-6 lg:h-10 lg:w-10  rounded-full p-1"
+              className="chevron-button h-6 w-6 rounded-full p-1  lg:h-10 lg:w-10"
             >
               <ChevronRightIcon />
             </button>
           </div>
         </div>
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-center sm:justify-end">
           {slides.map((_, i) => (
             <div
               className={`mx-1  mt-3 rounded-full transition-all  ${
@@ -65,9 +65,7 @@ const Carousel = ({ slides, slidesPC }) => {
             />
           ))}
         </div>
-  
       </div>
-      <p>{curent}</p>
     </>
   );
 };

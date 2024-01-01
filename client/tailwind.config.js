@@ -11,7 +11,8 @@ module.exports = {
         blackSoft: "#252525"
       },
       fontFamily: {
-        actor: ["Actor", "sans-serif"]
+        actor: ["Actor", "sans-serif"],
+        helvetica: ["HELVETICA", "serif"]
       }
     },
   },

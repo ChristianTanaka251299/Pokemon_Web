@@ -4,6 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
 
+@font-face {
+  font-family: "HELVETICA";
+  src: url("../public/assets//FreeSansBold.ttf");
+}
+
 
 @layer utilities {
   .container-screen{

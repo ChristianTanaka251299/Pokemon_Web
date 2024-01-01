@@ -6,7 +6,7 @@ import Profile from "../assets/pokeball_profile.jpg";
 const Header = () => {
   return (
     <>
-      <section className="sticky top-0 bg-white">
+      <section className="sticky top-0 bg-white z-40">
         <div className="container-screen flex  relative items-center justify-center lg:justify-between  py-3 ">
           <img src={Logo} alt="pokemon_logo.png" className="w-1/3 lg:w-[10%]" />
           <div className="hidden md:flex font-actor  w-1/2 justify-between">
