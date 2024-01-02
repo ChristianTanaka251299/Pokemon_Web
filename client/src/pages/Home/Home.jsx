@@ -8,9 +8,10 @@ const slidesPC = [Banner1PC, Banner2PC, Banner3PC]
 const Home = () => {
   return (
     <>
-      <section className="h-screen bg-primaryBlue">
+      <section className=" bg-primaryBlue">
         <Carousel slides={slides} slidesPC = {slidesPC}/>
         <Series/>
+        <TopPicks/>
       </section>
     </>
   );

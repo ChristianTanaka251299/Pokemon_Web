@@ -12,14 +12,14 @@ const Carousel = ({ slides, slidesPC }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       next();
-    }, 2800);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [next]);
 
   return (
     <>
-      <div className=" container-screen  my-5 h-1/4 lg:h-[60%]">
+      <div className=" container-screen  my-5 h-1/4 lg:h-auto">
         <div className="relative flex h-3/4 overflow-hidden rounded-lg ">
           <div
             className="flex transition-transform duration-500 ease-out sm:hidden"
@@ -54,7 +54,7 @@ const Carousel = ({ slides, slidesPC }) => {
             </button>
           </div>
         </div>
-        <div className="flex items-center justify-center sm:justify-end">
+        <div className="flex items-center justify-center sm:justify-start">
           {slides.map((_, i) => (
             <div
               className={`mx-1  mt-3 rounded-full transition-all  ${
