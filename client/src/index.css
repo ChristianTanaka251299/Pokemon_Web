@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Actor&family=Montserrat:wght@200;300;400&display=swap');
+
 
 @font-face {
   font-family: "HELVETICA";
@@ -17,5 +18,9 @@
 
   .header-text{
     @apply text-blackSoft font-thin hover:text-slate-200 transition duration-200 text-xl active:text-primaryYellow
+  }
+
+  .blue-button{
+    @apply font-helvetica  bg-primaryBlue px-10 rounded-md hover:bg-primaryYellow transition duration-100 py-2 text-white lg:px-28
   }
 }
