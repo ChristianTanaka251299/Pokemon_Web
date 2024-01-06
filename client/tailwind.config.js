@@ -12,7 +12,8 @@ module.exports = {
       },
       fontFamily: {
         actor: ["Actor", "sans-serif"],
-        helvetica: ["HELVETICA", "serif"]
+        helvetica: ["HELVETICA", "serif"],
+        montserrat: ["Montserrat", "sans-serif"]
       }
     },
   },
