@@ -1,4 +1,4 @@
-const { uidGenerator } = require("../helper/uidGenerator")
+const { uidGenerator } = require("../helper/uidGenerator");
 const { users } = require("../models");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
@@ -16,10 +16,10 @@ module.exports = {
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const lastRegister= await users.findOne({
-      order:[['createdAt', 'DESC']]
-    })
-    const generateUID = parseInt(uidGenerator(lastRegister.dataValues.id + 1))
+    const lastRegister = await users.findOne({
+      order: [["createdAt", "DESC"]],
+    });
+    const generateUID = parseInt(uidGenerator(lastRegister.dataValues.id + 1));
     try {
       const [user, created] = await users.findOrCreate({
         where: {
@@ -51,6 +51,33 @@ module.exports = {
         message: "Theres an error",
       });
       console.log(error);
+    }
+  },
+
+  login: async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      const getUser = await users.findOne({
+        where: {
+          email,
+        },
+      });
+      const hashPassword = getUser.dataValues.password;
+
+      const isValid = await bcrypt.compare(password, hashPassword);
+      if(!getUser) return res.status(401).send({message: "User not fount"})
+      if (!isValid) return res.status(401).send({ message: "Wrong password" });
+
+      res.status(200).send({
+        message:"Login Successfully"
+      })
+
+    } catch (error) {
+      res.status(400).send({
+        message: "Theres an error",
+      });
+      console.log("ini error", error)
     }
   },
 };
