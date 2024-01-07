@@ -1,23 +1,80 @@
 import React from "react";
+import { useFormik } from "formik";
+import axios from "axios"
+
+import { successAlert } from "../../../helper/alert"
 
 const Form = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    onSubmit: async(values) => {
+      try {
+        const result = await axios.post (`${process.env.REACT_APP_BASE_URL}/user/login`, values)
+        await successAlert(result.data.message)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    validate: values => {
+      let errors = {}
+
+      if(!values.email){
+        errors.email = 'Email Required'
+      } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)){
+        errors.email = 'Invalid Email Format'
+      }
+
+      if(!values.password){
+        errors.password = 'Password Required'
+      }
+      return errors
+    }
+  });
+  // console.log("Visited Fields", formik.touched)
+
   return (
     <div className="text-center">
-      <form className="lg:flex  lg:items-center lg:flex-col">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="lg:flex  lg:flex-col lg:items-center"
+      >
         <input
           type="text"
           id="email"
-          className=" font-montserrat w-3/4 lg:w-1/2 rounded-md border border-gray-400 bg-gray-50 px-4 py-3 text-sm text-slate-600 placeholder-gray-400"
+          name="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          onBlur={formik.handleBlur}
+          className=" w-3/4 rounded-md border border-gray-400 bg-gray-50 px-4 py-3 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-1/2"
           placeholder="Email"
         />
+        {formik.touched.email && formik.errors.email && (
+          <div className="font-montserrat text-red-600 font-medium text-xs mt-2">
+            <p>{formik.errors.email}</p>
+          </div>
+        )}
         <input
           type="text"
           id="password"
-          className=" font-montserrat my-8 w-3/4 lg:w-1/2 rounded-md border border-gray-400 bg-gray-50 px-4 py-3 text-sm text-slate-600 placeholder-gray-400"
+          name="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          onBlur={formik.handleBlur}
+          className=" mt-5 w-3/4 rounded-md border border-gray-400 bg-gray-50 px-4 py-3 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-1/2"
           placeholder="Password"
         />
+        {formik.touched.password && formik.errors.password && (
+          <div className="font-montserrat text-red-600 font-medium text-xs mt-2">
+            <p>{formik.errors.password}</p>
+          </div>
+        )}
+        <button type="submit" className="font-helvetica  bg-primaryBlue px-10 rounded-md hover:bg-primaryYellow transition duration-100 py-2 text-white lg:px-28 lg:mt-4 mt-6"> Sign in </button>
       </form>
-      <button className="blue-button lg:mt-4"> Sign in </button>
     </div>
   );
 };
