@@ -12,8 +12,9 @@ const Form = () => {
     },
 
     onSubmit: async(values) => {
+      console.log("ini values", values)
       try {
-        const result = await axios.post (`${process.env.REACT_APP_BASE_URL}/user/login`, values)
+        const result = await axios.post (`http://localhost:8000/user/login`, values)
         await successAlert(result.data.message)
       } catch (error) {
         console.log(error)
@@ -59,7 +60,7 @@ const Form = () => {
           </div>
         )}
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           onChange={formik.handleChange}

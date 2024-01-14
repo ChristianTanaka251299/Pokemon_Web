@@ -5,6 +5,23 @@ import axios from "axios";
 import { successAlert } from "../../../helper/alert";
 
 const Form = () => {
+  const menu = [
+    {
+      name: "email",
+      type: "email",
+      placeholder: "christian.tanaka2512@gmail.com"
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "strong_password123#"
+    },
+    {
+      name: "verify",
+      type: "password",
+      placeholder: "strong_password123#"
+    },
+  ];
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -15,9 +32,10 @@ const Form = () => {
     },
 
     onSubmit: async (values) => {
+      console.log("ini values register", values)
       try {
         const result = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/user/login`,
+          `http://localhost:8000/user/register`,
           values,
         );
         await successAlert(result.data.message);
@@ -106,76 +124,31 @@ const Form = () => {
             )}
           </div>
         </div>
-        <div className="mt-3 flex flex-col lg:w-3/5">
-          <label
-            htmlFor="email"
-            className="mb-1 mr-auto font-montserrat text-xs"
-          >
-            Email :
-          </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
-            className=" w-full rounded-sm border border-gray-400 bg-gray-50 px-4 py-1 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-full"
-            placeholder="christian.tanaka2512@gmail.com"
-          />
-          {formik.touched.email && formik.errors.email && (
-            <div className="mt-2 text-left font-montserrat text-xs font-medium text-red-600">
-              <p>{formik.errors.email}</p>
-            </div>
-          )}
-        </div>
-        <div className="mt-3 flex flex-col lg:w-3/5">
-          <label
-            htmlFor="password"
-            className="mb-1 mr-auto font-montserrat text-xs"
-          >
-            Password :
-          </label>
-          <input
-            type="text"
-            id="password"
-            name="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
-            className=" w-full rounded-sm border border-gray-400 bg-gray-50 px-4 py-1 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-full"
-            placeholder="strong_password123#"
-          />
-          {formik.touched.password && formik.errors.password && (
-            <div className="mt-2 text-left font-montserrat text-xs font-medium text-red-600">
-              <p>{formik.errors.password}</p>
-            </div>
-          )}
-        </div>
-        <div className="mt-3 flex flex-col lg:w-3/5">
-          <label
-            htmlFor="verify"
-            className="mb-1 mr-auto font-montserrat text-xs"
-          >
-            Verify Password :
-          </label>
-          <input
-            type="text"
-            id="verify"
-            name="verify"
-            onChange={formik.handleChange}
-            value={formik.values.verify}
-            onBlur={formik.handleBlur}
-            className=" w-full rounded-sm border border-gray-400 bg-gray-50 px-4 py-1 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-full"
-            placeholder="strong_password123#"
-          />
-          {formik.touched.verify && formik.errors.verify && (
-            <div className="mt-2 text-left font-montserrat text-xs font-medium text-red-600">
-              <p>{formik.errors.verify}</p>
-            </div>
-          )}
-        </div>
-
+        {menu.map((value) => (
+          <div className="mt-3 flex flex-col lg:w-3/5">
+            <label
+              htmlFor={value.name}
+              className="mb-1 mr-auto font-montserrat text-xs"
+            >
+              <p>{`${value.name} :`}</p>
+            </label>
+            <input
+              type={value.type}
+              id = {value.name}
+              name= {value.name}
+              onChange={formik.handleChange}
+              value={formik.values[value.name]}
+              onBlur={formik.handleBlur}
+              className=" w-full rounded-sm border border-gray-400 bg-gray-50 px-4 py-1 font-montserrat text-sm text-slate-600 placeholder-gray-400 lg:w-full"
+              placeholder= {value.placeholder}
+            />
+            {formik.touched[value.name]&& formik.errors[value.name]&& (
+              <div className="mt-2 text-left font-montserrat text-xs font-medium text-red-600">
+                <p>{formik.errors[value.name]}</p>
+              </div>
+            )}
+          </div>
+        ))}    
         <button
           type="submit"
           className="mt-6  rounded-md bg-primaryBlue px-10 py-2 font-helvetica text-white transition duration-100 hover:bg-primaryYellow lg:mt-10 lg:mt-4 lg:px-28"

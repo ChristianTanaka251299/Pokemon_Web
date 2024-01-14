@@ -1,8 +1,5 @@
 import { Route } from "react-router-dom";
-import { Home } from "../pages/Home";
-import { Login } from "../pages/Login"
-import { SignUp } from "../pages/SignUp"
-import SplashScreen from "../pages/SplashScreen";
+import {SplashScreen, Home, SignUp, Login, TestingPage} from "../pages";
 
 const routes = [
   <Route
@@ -34,6 +31,14 @@ const routes = [
     element={
       <>
         <SignUp />
+      </>
+    }
+  />,
+  <Route
+    path="/test"
+    element={
+      <>
+        <TestingPage />
       </>
     }
   />,
