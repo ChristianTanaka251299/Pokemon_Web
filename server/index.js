@@ -1,9 +1,12 @@
 const express = require("express");
 const { Sequelize } = require("sequelize");
+const db = require("./models");
 const cors = require("cors")
 const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
+
+
 
 const { userRouters } = require("./routers")
 

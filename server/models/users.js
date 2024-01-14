@@ -48,6 +48,8 @@ module.exports = (sequelize, DataTypes) => {
       status: DataTypes.STRING,
       profile_picture: DataTypes.BLOB,
       gender: DataTypes.ENUM("male", "female"),
+      verify: DataTypes.BOOLEAN,
+      refresh_token: DataTypes.STRING
     },
     {
       sequelize,
