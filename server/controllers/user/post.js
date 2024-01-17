@@ -1,15 +1,15 @@
 const { uidGenerator } = require("../../helper/uidGenerator");
 const { users } = require("../../models");
 const bcrypt = require("bcrypt");
-const nodemailer = require("../../helper/nodemailer")
+const nodemailer = require("../../helper/nodemailer");
 require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
+const endpoint = process.env.ENDPOINT
 
 module.exports = {
   register: async (req, res) => {
-    const { first_name, last_name, password, verify, email } =
-      req.body;
+    const { first_name, last_name, password, verify, email } = req.body;
     // const profile_picture = req.file;
 
     if (password !== verify)
@@ -38,7 +38,29 @@ module.exports = {
           verify: false,
         },
       });
+
       if (created) {
+        nodemailer.sendMail({
+          from: "sender@server.com",
+          to: email,
+          subject: "Register to Pokémon",
+          html: `
+          <h1>Welcome to Pokémon</h1>
+          <p>Thank you ${first_name} for registering with Pokémon.
+            To complete the registration process and activate your account, we require confirmation from you.
+          </p>
+    
+          <p>
+            Please click the verification link below to confirm your registration
+          </p>
+          <a href="${endpoint}/user/verify_user/${generateUID}">Verification Link</a> 
+    
+          <p>Make sure to verify your account to access all the features of our service.</p>
+    
+          <p>Best regards,</p>
+          <p>Pokémon Support Team</p>
+          <p>Christian Tanaka</p>`,
+        });
         res.status(200).send({
           message: "Success register new user",
           result: user,
@@ -90,13 +112,8 @@ module.exports = {
           },
         }
       );
-      
-      nodemailer.sendMail({
-        from: "sender@server.com",
-        to: "tanakaalden@gmail.com",
-        subject:"testing nodemailer",
-        text:"Jika anda menerima email ini maka selamat nodemailernya masuk pak eko"
-      })
+    
+
       res.status(200).send({
         message: "Login Success",
         token: accessToken,
@@ -106,7 +123,6 @@ module.exports = {
       res.status(400).send({
         message: "Theres an Error",
       });
-      console.log("ini errornya", error);
     }
   },
 
@@ -134,12 +150,13 @@ module.exports = {
       });
 
       res.status(200).send({
-        accessToken: accessToken
-      })
+        accessToken: accessToken,
+      });
     } catch (error) {
       res.send(400).send({
-        message: "Theres an Error"
-      })
+        message: "Theres an Error",
+      });
     }
   },
+
 };

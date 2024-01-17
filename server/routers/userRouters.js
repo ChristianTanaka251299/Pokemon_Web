@@ -1,14 +1,10 @@
 const express = require("express");
-const { userControllers } = require("../controllers");
+const { postControllers, getControllers } = require("../controllers/user");
 
 const router = express.Router();
-<<<<<<< HEAD
-router.post("/register", userControllers.postControllers.register)
-router.post("/login",userControllers.postControllers.login)
-=======
-router.post("/register", userControllers.register)
-router.post("/login",userControllers.login)
->>>>>>> 1f3df973d01e659619c426ff261b6c82b13e07cc
+router.get("/verify_user/:uid", getControllers.verifyAccount)
+router.post("/register", postControllers.register)
+router.post("/login", postControllers.login)
 
 
 module.exports = router;
