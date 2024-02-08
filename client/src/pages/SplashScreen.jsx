@@ -14,7 +14,7 @@ const SplashScreen = () => {
         <img
           src={Pokeball}
           alt="pokeball.png"
-          className="animate-bounce w-10 mt-auto  mx-auto sm:mx-3 h-10 mb-6"
+          className="animate-spin w-10 mt-auto  mx-auto sm:mx-3 h-10 mb-6"
         />
         <hr className="sm:w-1/12 w-5/12 border-4 mt-auto mb-10" />
       </div>

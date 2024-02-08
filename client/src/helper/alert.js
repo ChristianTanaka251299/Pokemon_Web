@@ -9,4 +9,13 @@ function successAlert(message = "") {
   });
 }
 
-export { successAlert };
+function errorAlertWithMessage(message = "") {
+  Swal.fire({
+      icon: "error",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+  })
+}
+
+export { successAlert, errorAlertWithMessage };

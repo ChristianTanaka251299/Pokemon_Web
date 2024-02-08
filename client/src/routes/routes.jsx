@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import {SplashScreen, Home, SignUp, Login, TestingPage} from "../pages";
+import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage } from "../pages";
 
 const routes = [
   <Route
@@ -39,6 +39,22 @@ const routes = [
     element={
       <>
         <TestingPage />
+      </>
+    }
+  />,
+  <Route
+    path="/series"
+    element={
+      <>
+        <SeriesPage />
+      </>
+    }
+  />,
+  <Route
+    path="/pokemon"
+    element={
+      <>
+        <PokemonPage />
       </>
     }
   />,

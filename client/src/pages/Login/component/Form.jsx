@@ -1,10 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { useFormik } from "formik";
+import {jwtDecode} from "jwt-decode";
 import axios from "axios"
 
-import { successAlert } from "../../../helper/alert"
+import { successAlert, errorAlertWithMessage } from "../../../helper/alert"
+import { login } from "../../../reducers/userSlice";
 
 const Form = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,12 +18,21 @@ const Form = () => {
     },
 
     onSubmit: async(values) => {
-      console.log("ini values", values)
       try {
-        const result = await axios.post (`http://localhost:8000/user/login`, values)
+        const result = await axios.post (`${process.env.REACT_APP_BASE_URL}/user/login`, values)
         await successAlert(result.data.message)
+        const decode = await jwtDecode(result.data.token, {
+          header: process.env.REACT_APP_ACCESS_TOKEN
+        })
+        const dispatchValue = {
+          firstName: decode.firstName,
+          lastName: decode.lastName,
+          refreshToken: result.data.refresh_token
+        }
+        dispatch(login(dispatchValue))
+        navigate("/")
       } catch (error) {
-        console.log(error)
+        errorAlertWithMessage(error?.response?.data?.message)
       }
     },
 
