@@ -7,8 +7,8 @@ const MobileFilter = ({ setSearchParams,  setUrl }) => {
   return (
     <>
       <div className="container-screen flex items-center md:hidden">
-        <SearchForm />
-        <FunnelIcon className="ml-3 w-5 text-primaryBlue" />
+        <SearchForm setSearchParams={setSearchParams} setUrl={setUrl}/>
+        {/* <FunnelIcon className="ml-3 w-5 text-primaryBlue" /> */}
         <ShowingFilter
           setSearchParams={setSearchParams}
           setUrl={setUrl}

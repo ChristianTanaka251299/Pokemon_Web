@@ -2,20 +2,22 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { param } from "../../../reducers/paramSlice";
 
-const ShowingFilter = ({ setSearchParams,  setUrl }) => {
+const ShowingFilter = ({ setSearchParams, setUrl }) => {
   const params = useSelector((state) => state.param);
   const item = useSelector((state) => state.param.item);
   const dispatch = useDispatch();
+  
   const fetchNewPokemon = (e) => {
     dispatch(param({ name: "item", value: e.target.value }));
-    // setSearchParams(params);
   };
 
   const searchParamsSet = async () => {
     await setSearchParams(params);
-    setUrl(`https://pokeapi.co/api/v2/pokemon?limit=${item}&offset=0`);
+    if (params.item !== undefined) {
+      setUrl(`https://pokeapi.co/api/v2/pokemon?limit=${item}&offset=0`);
+    }
   };
-
+  
   useEffect(() => {
     searchParamsSet();
   }, [item]);

@@ -6,7 +6,6 @@ import { Header, Footer } from "./components";
 import SplashScreen from "./pages/SplashScreen";
 function App() {
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -19,9 +18,11 @@ function App() {
         <SplashScreen />
       ) : (
         <>
-          <Header />
-          <Routes>{routes}</Routes>
-          <Footer />
+          <div className="flex h-screen flex-col">
+            <Header />
+            <Routes>{routes}</Routes>
+            <Footer />
+          </div>
         </>
       )}
     </div>

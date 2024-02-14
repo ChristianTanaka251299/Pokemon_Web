@@ -10,10 +10,13 @@ export const paramSlice = createSlice({
     reducers: {
         param: (state, action) => {
             state[action.payload.name] = action.payload.value
+        },
+        resetParam: () => {
+            return initialState
         }
     }
 })
 
-export const { param } = paramSlice.actions
+export const { param, resetParam } = paramSlice.actions
 
 export default paramSlice.reducer
