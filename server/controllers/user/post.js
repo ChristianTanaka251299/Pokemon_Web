@@ -94,6 +94,7 @@ module.exports = {
       if (!isValid) return res.status(401).send({ message: "Wrong Password" });
 
       const user = {
+        id: getUser.dataValues.id,
         firstName: getUser.dataValues.first_name,
         lastName: getUser.dataValues.last_name,
         email: getUser.dataValues.email,

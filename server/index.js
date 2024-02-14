@@ -8,7 +8,7 @@ const PORT = process.env.PORT;
 
 
 
-const { userRouters } = require("./routers")
+const { userRouters, favoriteRouters } = require("./routers")
 
 const sequelize = new Sequelize("pokemon_advance", "root", "password", {
     host: "localhost",
@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRouters)
+app.use("/favorite", favoriteRouters)
 
 // db.sequelize.sync({ alter: true });
 
