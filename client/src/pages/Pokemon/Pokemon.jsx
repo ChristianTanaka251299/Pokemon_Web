@@ -52,9 +52,46 @@ const Pokemon = () => {
           params: { user_id: userId },
         },
       );
-      setUserFav(res.data.data)
+      setUserFav(res.data.data);
+      console.log(res.data.data);
     } catch (error) {
       console.log("Error fetching user favorites:", error);
+    }
+  };
+
+  const handleFavToggle = async (pokemonName) => {
+    try {
+      const isPokemonInFav = userFav.some(
+        (fav) => fav.pokemon_name === pokemonName,
+      );
+      const pokemonData = {
+        user_id: userId,
+        pokemon_name: pokemonName,
+      };
+      if (isPokemonInFav) {
+        try {
+          await axios.delete(
+            `${process.env.REACT_APP_BASE_URL}/favorite/delete`,
+            {
+              params: { user_id: userId, pokemon_name: pokemonName },
+            },
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/favorite/add`,
+            pokemonData,
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchUserFav();
+    } catch (error) {
+      console.log("Error toggling favorite:", error);
     }
   };
 
@@ -107,12 +144,21 @@ const Pokemon = () => {
               className="flex h-40 flex-col rounded-md bg-primaryBlue p-3 md:h-64"
             >
               <button className=" items-end">
-                <HeartIcon className="ml-auto w-5 text-white hover:text-primaryYellow lg:w-7" />
+                <HeartIcon
+                  className={`ml-auto w-5 ${
+                    userFav.some((fav) => fav.pokemon_name === value.name)
+                      ? "text-primaryYellow"
+                      : "text-white"
+                  } hover:text-primaryYellow lg:w-7`}
+                  onClick={() => handleFavToggle(value.name)}
+                />
               </button>
-              <img
-                src={value?.sprites?.other["official-artwork"].front_default}
-                className="mx-auto h-24 w-24 lg:h-40 lg:w-40"
-              />
+              <button onClick={() => alert("rugi dong")}>
+                <img
+                  src={value?.sprites?.other["official-artwork"].front_default}
+                  className="mx-auto h-24 w-24 lg:h-40 lg:w-40"
+                />
+              </button>
               <p className="mt-2 text-center font-helvetica text-xs text-white lg:mt-3 lg:text-base">
                 {capitalizeFirstLetter(value?.name)}
               </p>
@@ -121,7 +167,14 @@ const Pokemon = () => {
         ) : (
           <div className="flex h-40 flex-col rounded-md bg-primaryBlue p-3 md:h-64">
             <button className=" items-end">
-              <HeartIcon className="ml-auto w-5 text-white hover:text-primaryYellow lg:w-7" />
+              <HeartIcon
+                className={`ml-auto w-5 ${
+                  userFav.some((fav) => fav.pokemon_name === pokeData?.name)
+                    ? "text-primaryYellow"
+                    : "text-white"
+                } hover:text-primaryYellow lg:w-7`}
+                onClick={() => handleFavToggle(pokeData?.name)}
+              />
             </button>
             <img
               src={pokeData?.sprites?.other["official-artwork"].front_default}
