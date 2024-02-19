@@ -19,7 +19,7 @@ const Carousel = ({ slides, slidesPC }) => {
 
   return (
     <>
-      <div className=" container-screen  my-5 h-1/4 lg:h-auto">
+      <div className=" container-screen  my-5 h-[250px] lg:h-auto">
         <div className="relative flex h-3/4 overflow-hidden rounded-lg ">
           <div
             className="flex transition-transform duration-500 ease-out sm:hidden"
