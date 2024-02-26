@@ -3,15 +3,22 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo/pokemon_logo.png";
 import Profile from "../assets/pokeball_profile.jpg";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const userInfo = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       <section className="sticky top-0 z-40 bg-white">
         <div className="container-screen relative  flex items-center justify-center py-3  lg:justify-between ">
-          <img src={Logo} alt="pokemon_logo.png" className="w-1/3 lg:w-[10%]"/>
+          <img
+            src={Logo}
+            alt="pokemon_logo.png"
+            className="w-1/3 hover:cursor-pointer lg:w-[10%]"
+            onClick={() => navigate("/")}
+          />
 
           <div className="hidden w-1/2 justify-between  font-actor md:flex">
             <Link to="/">
@@ -41,9 +48,7 @@ const Header = () => {
             </Link>
           ) : (
             <>
-              <button
-                onClick={() => setOpen(!open)}
-              >
+              <button onClick={() => setOpen(!open)}>
                 <div className="flex items-center lg:relative">
                   <p
                     className={`absolute right-6 hidden rounded-sm ${
@@ -60,15 +65,21 @@ const Header = () => {
             </>
           )}
           {open && (
-            <div className="absolute -bottom-28 text-right w-5/12 lg:w-3/12 rounded font-actor  right-0 bg-white drop-shadow-md">
+            <div className="absolute -bottom-28 right-0 w-5/12 rounded bg-white text-right  font-actor drop-shadow-md lg:w-3/12">
               <Link>
-                <p className="border-b mt-2 pr-2 hover:text-slate-300 transition duration-150">Profile</p>
+                <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
+                  Profile
+                </p>
               </Link>
               <Link>
-                <p className="border-b mt-2 pr-2 hover:text-slate-300 transition duration-150">Friends</p>
+                <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
+                  Friends
+                </p>
               </Link>
               <Link>
-                <p className="border-b mt-2 pr-2 hover:text-slate-300 transition duration-150">Logout</p>
+                <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
+                  Logout
+                </p>
               </Link>
             </div>
           )}

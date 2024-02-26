@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage } from "../pages";
+import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage, PokeDetailPage } from "../pages";
 
 const routes = [
   <Route
@@ -55,6 +55,14 @@ const routes = [
     element={
       <>
         <PokemonPage />
+      </>
+    }
+  />,
+  <Route
+    path="/pokemon-detail"
+    element={
+      <>
+        <PokeDetailPage />
       </>
     }
   />,

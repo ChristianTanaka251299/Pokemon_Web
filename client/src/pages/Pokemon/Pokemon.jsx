@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { PCFilter, MobileFilter } from "./components";
@@ -6,7 +7,8 @@ import { HeartIcon } from "@heroicons/react/24/solid";
 import Background from "../../assets/background.jpg";
 import Loading from "../../components/LoadingFetchData";
 import { capitalizeFirstLetter } from "../../helper/string";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setPokemon } from "../../reducers/pokemonSlice";
 
 const Pokemon = () => {
   const sectionStyle = {
@@ -23,7 +25,8 @@ const Pokemon = () => {
   );
   const [nextUrl, setNextUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.id);
 
   const fetchList = async (link) => {
@@ -53,7 +56,6 @@ const Pokemon = () => {
         },
       );
       setUserFav(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       console.log("Error fetching user favorites:", error);
     }
@@ -111,6 +113,11 @@ const Pokemon = () => {
     }
   };
 
+  const onNavigate = async (item) => {
+    dispatch(setPokemon(item));
+    navigate("/pokemon-detail");
+  };
+
   useEffect(() => {
     fetchList(url);
   }, [url]);
@@ -153,7 +160,7 @@ const Pokemon = () => {
                   onClick={() => handleFavToggle(value.name)}
                 />
               </button>
-              <button onClick={() => alert("rugi dong")}>
+              <button onClick={() => onNavigate(value)}>
                 <img
                   src={value?.sprites?.other["official-artwork"].front_default}
                   className="mx-auto h-24 w-24 lg:h-40 lg:w-40"
@@ -176,10 +183,12 @@ const Pokemon = () => {
                 onClick={() => handleFavToggle(pokeData?.name)}
               />
             </button>
-            <img
-              src={pokeData?.sprites?.other["official-artwork"].front_default}
-              className="mx-auto h-24 w-24 lg:h-40 lg:w-40"
-            />
+            <button onClick={() => onNavigate(pokeData)}>
+              <img
+                src={pokeData?.sprites?.other["official-artwork"].front_default}
+                className="mx-auto h-24 w-24 lg:h-40 lg:w-40"
+              />
+            </button>
             <p className="mt-2 text-center font-helvetica text-xs text-white lg:mt-3 lg:text-base">
               {pokeData?.name && capitalizeFirstLetter(pokeData?.name)}
             </p>

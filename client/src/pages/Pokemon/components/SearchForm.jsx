@@ -10,7 +10,6 @@ const SearchForm = ({ setSearchParams, setUrl }) => {
 
   const setParamReducer = (e) => {
     dispatch(param({ name: "search", value: e.target.value }));
-    console.log(e.target.value);
   };
 
   const findSearch = async () => {

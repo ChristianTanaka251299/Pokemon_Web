@@ -8,13 +8,13 @@ const Series = () => {
     <>
       <section className="container-screen sm:hidden">
         <div className="flex justify-center">
-          <Link to="/">
+          <Link to="/series">
             <div className="mx-8">
               <img src={SeriesIcon} className="h-16" />
               <p className="mt-3 text-center text-white">Series</p>
             </div>
           </Link>
-          <Link to="/">
+          <Link to="/pokemon">
             <div className="mx-8">
               <img src={PokeBallIcon} className="h-16" />
               <p className="mt-3 text-center text-white">Pokémon</p>
