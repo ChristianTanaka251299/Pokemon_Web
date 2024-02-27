@@ -48,26 +48,26 @@ const PokeDetail = () => {
   return (
     <section>
       {/* Image Section */}
-      <div className="flex h-[200px] items-center justify-center overflow-hidden">
+      <div className="flex h-[200px] items-center justify-center overflow-hidden lg:hidden">
         <img src={Foreground} className="relative h-[300px]" />
         <img src={pokemon.image} className="absolute h-[170px]" />
       </div>
       {/* Name  */}
       <div className="container-screen my-4 flex">
         <div>
-          <h1 className="border-l-4 border-primaryYellow pl-3 font-helvetica text-xl text-primaryBlue">
+          <h1 className="border-l-4 border-primaryYellow pl-3 font-helvetica text-xl text-primaryBlue lg:border-l-8 lg:text-6xl">
             {capitalizeFirstLetter(pokemon.name)}
           </h1>
         </div>
-        <div className="ml-auto grid grid-cols-2 items-center gap-4 text-center">
+        <div className="ml-auto grid grid-cols-2 items-center gap-4 text-center lg:ml-8">
           <div
-            className={`rounded-sm bg-[${colorOne}] px-4 py-0.5 text-xs font-medium text-white`}
+            className={`rounded-sm ${colorOne} px-4 py-0.5 text-xs font-medium text-white`}
           >
             {capitalizeFirstLetter(pokemon.type[0].type.name)}
           </div>
           {pokemon?.type[1]?.type?.name && (
             <div
-              className={`rounded-sm bg-[${colorTwo}] px-4 py-0.5  text-xs font-medium text-white`}
+              className={`rounded-sm ${colorTwo} px-4 py-0.5  text-xs font-medium text-white`}
             >
               {capitalizeFirstLetter(pokemon.type[1].type.name)}
             </div>
@@ -76,7 +76,7 @@ const PokeDetail = () => {
       </div>
       {/* subtext */}
       <div className="container-screen">
-        <h2 className="text-justify font-montserrat text-sm text-primaryYellow">
+        <h2 className="text-justify font-montserrat text-sm text-primaryYellow lg:pl-6">
           {language === "en" ? subtexts : subTextKo}
         </h2>
       </div>
@@ -105,80 +105,98 @@ const PokeDetail = () => {
         </button>
       </div>
       {/* Stats */}
-      <div className="container-screen">
-        {/* HP */}
-        <div className="mb-3 mt-7 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">HP:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full  bg-primaryYellow`}
-                style={{ width: `${(pokemon.hp / 150) * 100}%` }}
-              ></div>
-            )}
+      <section className="container-screen lg:grid lg:grid-cols-2 lg:items-center">
+        <div>
+          {/* HP */}
+          <div className="mb-3 mt-7 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              HP:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full  bg-primaryYellow`}
+                  style={{ width: `${(pokemon.hp / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
+          </div>
+          {/* ATTACK */}
+          <div className="my-3 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              Attack:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full  bg-primaryYellow`}
+                  style={{ width: `${(pokemon.attack / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
+          </div>
+          {/* Deffense */}
+          <div className="my-3 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              Defense:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full bg-primaryYellow`}
+                  style={{ width: `${(pokemon.defense / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
+          </div>
+          {/* SP.Attack */}
+          <div className="my-3 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              Sp.Attack:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full bg-primaryYellow`}
+                  style={{ width: `${(pokemon.spatt / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
+          </div>
+          {/* SP.Defense */}
+          <div className="my-3 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              Sp.Defense:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full bg-primaryYellow`}
+                  style={{ width: `${(pokemon.spdef / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
+          </div>
+          {/* Speed */}
+          <div className=" my-3 grid grid-cols-3">
+            <h1 className="font-montserrat text-sm font-semibold lg:text-2xl">
+              Speed:
+            </h1>
+            <div className="relative col-span-2 bg-slate-200">
+              {hpWidth && (
+                <div
+                  className={`absolute h-full bg-primaryYellow`}
+                  style={{ width: `${(pokemon.speed / 150) * 100}%` }}
+                ></div>
+              )}
+            </div>
           </div>
         </div>
-        {/* ATTACK */}
-        <div className="my-3 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">Attack:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full  bg-primaryYellow`}
-                style={{ width: `${(pokemon.attack / 150) * 100}%` }}
-              ></div>
-            )}
-          </div>
+        {/* PC POKEMON IMAGE */}
+        <div className="hidden lg:flex  items-center justify-center overflow-hidden">
+          <img src={pokemon.image} className="ml-auto h-[400px]" />
         </div>
-        {/* Deffense */}
-        <div className="my-3 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">Defense:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full bg-primaryYellow`}
-                style={{ width: `${(pokemon.defense / 150) * 100}%` }}
-              ></div>
-            )}
-          </div>
-        </div>
-        {/* SP.Attack */}
-        <div className="my-3 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">Sp.Attack:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full bg-primaryYellow`}
-                style={{ width: `${(pokemon.spatt / 150) * 100}%` }}
-              ></div>
-            )}
-          </div>
-        </div>
-        {/* SP.Defense */}
-        <div className="my-3 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">Sp.Defense:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full bg-primaryYellow`}
-                style={{ width: `${(pokemon.spdef / 150) * 100}%` }}
-              ></div>
-            )}
-          </div>
-        </div>
-        {/* Speed */}
-        <div className=" my-3 grid grid-cols-3">
-          <h1 className="font-montserrat text-sm font-semibold">Speed:</h1>
-          <div className="relative col-span-2 bg-slate-200">
-            {hpWidth && (
-              <div
-                className={`absolute h-full bg-primaryYellow`}
-                style={{ width: `${(pokemon.speed / 150) * 100}%` }}
-              ></div>
-            )}
-          </div>
-        </div>
-      </div>
+      </section>
       {/* Back */}
       <div className="container-screen flex justify-end font-helvetica">
         <button onClick={() => navigate("/pokemon")}>Back</button>

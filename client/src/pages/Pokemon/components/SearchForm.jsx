@@ -15,7 +15,7 @@ const SearchForm = ({ setSearchParams, setUrl }) => {
   const findSearch = async () => {
     await setSearchParams(params);
     if (params.search !== "") {
-      setUrl(`https://pokeapi.co/api/v2/pokemon/${search}`);
+      setUrl(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`);
     } else {
       setUrl(`https://pokeapi.co/api/v2/pokemon?limit=${item || 8}&offset=0`);
     }

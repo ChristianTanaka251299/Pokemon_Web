@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <>
-      <section className="sticky top-0 z-40 bg-white">
+      <section className="sticky top-0 z-40 bg-white drop-shadow-md">
         <div className="container-screen relative  flex items-center justify-center py-3  lg:justify-between ">
           <img
             src={Logo}
