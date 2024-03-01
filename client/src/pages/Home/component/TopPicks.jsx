@@ -11,7 +11,6 @@ const TopPicks = () => {
     );
     const value = res.data.result[0];
     setCount(res.data.result[0]);
-    console.log("ini cek count", res.data.result[0]);
     getPokemonList(value);
   };
 

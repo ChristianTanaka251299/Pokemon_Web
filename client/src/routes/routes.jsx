@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage, PokeDetailPage } from "../pages";
+import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage, PokeDetailPage, ProfilePage } from "../pages";
 
 const routes = [
   <Route
@@ -63,6 +63,14 @@ const routes = [
     element={
       <>
         <PokeDetailPage />
+      </>
+    }
+  />,
+  <Route
+    path="/profile"
+    element={
+      <>
+        <ProfilePage />
       </>
     }
   />,

@@ -66,7 +66,7 @@ const Header = () => {
           )}
           {open && (
             <div className="absolute -bottom-28 right-0 w-5/12 rounded bg-white text-right  font-actor drop-shadow-md lg:w-3/12">
-              <Link>
+              <Link to={"/profile"}>
                 <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
                   Profile
                 </p>
