@@ -94,7 +94,7 @@ const ProfilePage = () => {
         <section>
           <div className="flex items-center justify-center">
             <h1 className="my-4 font-helvetica text-xl text-primaryBlue">
-              Favorite Pokemon
+              Favorite Pokémon 
             </h1>
           </div>
           {/* POKEMON CARD */}
