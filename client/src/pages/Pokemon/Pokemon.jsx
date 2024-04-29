@@ -61,7 +61,7 @@ const Pokemon = () => {
     }
   };
 
-  const handleFavToggle = async (pokemonName) => {
+  const handleFavToggle = async (pokemonName, image) => {
     try {
       const isPokemonInFav = userFav.some(
         (fav) => fav.pokemon_name === pokemonName,
@@ -69,6 +69,7 @@ const Pokemon = () => {
       const pokemonData = {
         user_id: userId,
         pokemon_name: pokemonName,
+        image: image
       };
       if (isPokemonInFav) {
         try {
@@ -157,7 +158,7 @@ const Pokemon = () => {
                       ? "text-primaryYellow"
                       : "text-white"
                   } hover:text-primaryYellow lg:w-7`}
-                  onClick={() => handleFavToggle(value.name)}
+                  onClick={() => handleFavToggle(value.name, value?.sprites?.other["official-artwork"].front_default)}
                 />
               </button>
               <button onClick={() => onNavigate(value)}>
@@ -180,7 +181,7 @@ const Pokemon = () => {
                     ? "text-primaryYellow"
                     : "text-white"
                 } hover:text-primaryYellow lg:w-7`}
-                onClick={() => handleFavToggle(pokeData?.name)}
+                onClick={() => handleFavToggle(pokeData?.name, pokeData?.sprites?.other["official-artwork"].front_default)}
               />
             </button>
             <button onClick={() => onNavigate(pokeData)}>

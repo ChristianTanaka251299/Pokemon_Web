@@ -4,13 +4,14 @@ require("dotenv").config();
 module.exports = {
   addFavorite: async (req, res) => {
     try {
-      const { user_id, pokemon_name } = req.body;
+      const { user_id, pokemon_name, image } = req.body;
 
       const result = await favorites.findOrCreate({
-        where: { user_id, pokemon_name },
+        where: { user_id, pokemon_name, image },
         default:{
             user_id,
-            pokemon_name
+            pokemon_name,
+            image
         }
       });
 

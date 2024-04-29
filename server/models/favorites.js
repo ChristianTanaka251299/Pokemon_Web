@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Favorite.belongsTo(models.users, {
         foreignKey: {
-          name: "users_id",
+          name: "user_id",
         },
       });
 
@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     },
     {
       sequelize,

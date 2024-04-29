@@ -21,4 +21,22 @@ module.exports = {
       res.status(400).send(error);
     }
   },
+
+  getUser: async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const result = await users.findOne({
+        where: {
+          id: userId,
+        },
+      });
+      res.status(200).send({
+        message: "Succes Get user",
+        result,
+      });
+    } catch (error) {
+      res.status(400).send(error);
+      console.log(error);
+    }
+  },
 };

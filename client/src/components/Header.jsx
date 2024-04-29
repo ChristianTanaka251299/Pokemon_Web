@@ -17,7 +17,7 @@ const Header = () => {
             src={Logo}
             alt="pokemon_logo.png"
             className="w-1/3 hover:cursor-pointer lg:w-[10%]"
-            onClick={() => navigate("/")}
+            onClick={() => { navigate("/"); setOpen(false); }}
           />
 
           <div className="hidden w-1/2 justify-between  font-actor md:flex">
@@ -66,7 +66,7 @@ const Header = () => {
           )}
           {open && (
             <div className="absolute -bottom-28 right-0 w-5/12 rounded bg-white text-right  font-actor drop-shadow-md lg:w-3/12">
-              <Link to={"/profile"}>
+              <Link to={"/profile"} onClick={() => setOpen(false)}>
                 <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
                   Profile
                 </p>

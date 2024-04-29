@@ -10,7 +10,7 @@ module.exports = {
       const { user_id } = req.query;
 
       const result = await favorites.findAll({
-        attributes: ["pokemon_name"],
+        attributes: ["id","pokemon_name", "image"],
         where: { user_id },
       });
 
