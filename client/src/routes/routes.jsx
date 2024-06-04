@@ -1,8 +1,19 @@
 import { Route } from "react-router-dom";
-import { SplashScreen, Home, SignUp, Login, TestingPage, SeriesPage, PokemonPage, PokeDetailPage, ProfilePage } from "../pages";
+import {
+  SplashScreen,
+  Home,
+  SignUp,
+  Login,
+  TestingPage,
+  SeriesPage,
+  PokemonPage,
+  PokeDetailPage,
+  ProfilePage,
+} from "../pages";
 
 const routes = [
   <Route
+    key="home"
     path="/"
     element={
       <>
@@ -11,6 +22,7 @@ const routes = [
     }
   />,
   <Route
+    key="splash"
     path="/splash"
     element={
       <>
@@ -19,6 +31,7 @@ const routes = [
     }
   />,
   <Route
+    key="login"
     path="/login"
     element={
       <>
@@ -27,6 +40,7 @@ const routes = [
     }
   />,
   <Route
+    key="sign_up"
     path="/sign-up"
     element={
       <>
@@ -35,6 +49,7 @@ const routes = [
     }
   />,
   <Route
+    key="test"
     path="/test"
     element={
       <>
@@ -43,6 +58,7 @@ const routes = [
     }
   />,
   <Route
+    key="series"
     path="/series"
     element={
       <>
@@ -51,6 +67,7 @@ const routes = [
     }
   />,
   <Route
+    key="pokemon"
     path="/pokemon"
     element={
       <>
@@ -59,6 +76,7 @@ const routes = [
     }
   />,
   <Route
+    key="pokemon_detail"
     path="/pokemon-detail"
     element={
       <>
@@ -67,6 +85,7 @@ const routes = [
     }
   />,
   <Route
+    key="profile"
     path="/profile"
     element={
       <>

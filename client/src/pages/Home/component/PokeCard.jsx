@@ -7,10 +7,9 @@ const PokeCard = ({ list }) => {
   const navigate = useNavigate();
   return (
     <>
-      {list.map((value) => (
-        <section>
+      {list.map((value,index) => (
+        <section key={index}>
           <div
-            key={value.id}
             className="flex h-40 flex-col rounded-md bg-white p-3 text-slate-800 md:h-52 md:w-52"
           >
             <button onClick={() => navigate("/pokemon")}>

@@ -25,8 +25,8 @@ const Carousel = ({ slides, slidesPC }) => {
             className="flex transition-transform duration-500 ease-out sm:hidden"
             style={{ transform: `translateX(-${curent * 100}%)` }}
           >
-            {slides.map((img) => (
-              <img src={img} className="w-full" />
+            {slides.map((img, index) => (
+              <img key={index} src={img} className="w-full" />
             ))}
           </div>
 
@@ -34,8 +34,8 @@ const Carousel = ({ slides, slidesPC }) => {
             className="hidden transition-transform duration-500 ease-out sm:flex"
             style={{ transform: `translateX(-${curent * 100}%)` }}
           >
-            {slidesPC.map((img) => (
-              <img src={img} className="w-full" />
+            {slidesPC.map((img, index) => (
+              <img key={index} src={img} className="w-full" />
             ))}
           </div>
 
@@ -54,9 +54,11 @@ const Carousel = ({ slides, slidesPC }) => {
             </button>
           </div>
         </div>
+        {/* Circle pagination */}
         <div className="flex items-center justify-center sm:justify-start">
           {slides.map((_, i) => (
             <div
+            key={i}
               className={`mx-1  mt-3 rounded-full transition-all  ${
                 curent === i
                   ? "h-3 w-3 bg-primaryYellow"
