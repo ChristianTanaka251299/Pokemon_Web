@@ -22,7 +22,7 @@ const userProfile = ({userInfo, setShowModal}) => {
           {/* PROFILE IMAGE */}
           <div className="flex flex-col items-center">
             <div className="relative h-36 w-36 lg:h-56 lg:w-56 overflow-hidden rounded-full bg-blue-200">
-              <img src={EmptyUser} className="h-40 w-44 lg:h-60 lg:w-64" />
+              <img src={`${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}` || EmptyUser} className="h-40 w-44 lg:h-60 lg:w-64" />
             </div>
             <button onClick={() => setShowModal(true)} className="my-4 rounded-md lg:rounded-sm bg-yellow-400 px-2 py-1  lg:py-2 font-helvetica text-white transition duration-200 hover:bg-primaryYellow">
               Change Profile Picture

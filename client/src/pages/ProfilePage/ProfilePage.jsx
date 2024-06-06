@@ -15,6 +15,7 @@ const ProfilePage = () => {
     const result = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/user/get/${userId}`,
     );
+    console.log("ini isi user info",result.data.result )
     setUserInfo(result.data.result);
   };
 
