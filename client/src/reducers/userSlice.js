@@ -18,10 +18,13 @@ export const userSlice = createSlice({
             state.last_name = action.payload.lastName
             state.profile_picture = action.payload.profilePicture
             state.refresh_token = action.payload.refreshToken
+        },
+        editProfile: (state, action) => {
+            state.profile_picture = action.payload
         }
     }
 })
 
-export const { login } = userSlice.actions
+export const { login, editProfile } = userSlice.actions
 
 export default userSlice.reducer

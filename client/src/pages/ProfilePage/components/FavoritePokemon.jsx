@@ -3,7 +3,7 @@ import axios from "axios"
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { capitalizeFirstLetter } from "../../../helper/string";
 
-const favoritePokemon = ({ userFav, userId }) => {
+const FavoritePokemon = ({ userFav, userId }) => {
     const handleFavToggle = async (pokemonName, image) => {
         try {
           const isPokemonInFav = userFav.some(
@@ -85,4 +85,4 @@ const favoritePokemon = ({ userFav, userId }) => {
   )
 }
 
-export default favoritePokemon
+export default FavoritePokemon

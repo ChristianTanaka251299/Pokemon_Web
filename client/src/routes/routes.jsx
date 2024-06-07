@@ -8,8 +8,9 @@ import {
   SeriesPage,
   PokemonPage,
   PokeDetailPage,
-  ProfilePage,
 } from "../pages";
+
+import { ProfilePage, EditProfilePage } from "../pages/ProfilePage"
 
 const routes = [
   <Route
@@ -90,6 +91,15 @@ const routes = [
     element={
       <>
         <ProfilePage />
+      </>
+    }
+  />,
+  <Route
+    key="profile"
+    path="/profile/edit"
+    element={
+      <>
+        <EditProfilePage />
       </>
     }
   />,

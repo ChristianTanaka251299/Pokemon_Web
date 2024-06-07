@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { UserProfile, FavoritePokemon, DropImage } from "./components"
 import { Modal } from "../../components"
+import { closeModal } from "../../reducers/modalSlice"
 
 const ProfilePage = () => {
   const userId = useSelector((state) => state.user.id);
+  const showModal = useSelector( (state) => state.modal.open)
   const [userInfo, setUserInfo] = useState([]);
   const [userFav, setUserFav] = useState([]);
-  const [showModal, setShowModal] = useState(false)
+  const dispatch = useDispatch()
+  // const [showModal, setShowModal] = useState(false)
   const [pokelist, setPokeList] = useState([]);
 
   const getUserInfo = async () => {
     const result = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/user/get/${userId}`,
     );
-    console.log("ini isi user info",result.data.result )
     setUserInfo(result.data.result);
   };
 
@@ -57,11 +59,11 @@ const ProfilePage = () => {
   return (
     <>
       <section className="container-screen lg:w-[78%]">
-        <UserProfile userInfo={userInfo} setShowModal={setShowModal}/>
+        <UserProfile userInfo={userInfo} />
         <FavoritePokemon userFav={userFav} userId={userId}/>
       </section>
-      <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
-        <DropImage/>
+      <Modal isVisible={showModal} onClose={() => dispatch(closeModal())}>
+        <DropImage getUserInfo={getUserInfo} />
       </Modal>
     </>
   );

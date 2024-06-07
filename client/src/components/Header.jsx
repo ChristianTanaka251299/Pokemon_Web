@@ -58,7 +58,7 @@ const Header = () => {
                     {!userInfo.first_name ? "Guest" : userInfo.first_name}
                   </p>
                   <div className="absolute -right-3 h-9 w-9 overflow-hidden rounded-full bg-blue-600 md:relative md:right-0 lg:h-9 lg:w-9">
-                    <img src={Profile} alt="profile_picture.jpg" />
+                    <img className="w-10 h-10" src={`${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}`} alt="profile_picture.jpg" />
                   </div>
                 </div>
               </button>
