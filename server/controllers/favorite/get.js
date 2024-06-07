@@ -26,7 +26,7 @@ module.exports = {
   getTopFav: async (req, res) => {
     try {
       const result = await sequelize.query(
-        "SELECT pokemon_name, COUNT(pokemon_name) AS count FROM favorites GROUP BY pokemon_name ORDER BY count DESC"
+        "SELECT pokemon_name, COUNT(pokemon_name) AS count FROM favorites GROUP BY pokemon_name ORDER BY count DESC LIMIT 5"
       );
       res.status(200).send({
         message: "success get top 5 pokemon",

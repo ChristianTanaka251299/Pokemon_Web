@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.favorites, {
         foreignKey: {
-          name: "users_id",
+          name: "user_id",
         },
       });
       User.hasMany(models.friends, {
         foreignKey: {
-          name: "users_id",
+          name: "user_id",
         },
       });
 
@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
+      
       first_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -46,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       status: DataTypes.STRING,
-      profile_picture: DataTypes.BLOB,
+      profile_picture: DataTypes.STRING,
       gender: DataTypes.ENUM("male", "female"),
       verify: DataTypes.BOOLEAN,
       refresh_token: DataTypes.STRING

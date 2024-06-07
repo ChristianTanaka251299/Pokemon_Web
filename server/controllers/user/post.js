@@ -5,7 +5,7 @@ const nodemailer = require("../../helper/nodemailer");
 require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
-const endpoint = process.env.ENDPOINT
+const endpoint = process.env.ENDPOINT;
 
 module.exports = {
   register: async (req, res) => {
@@ -74,9 +74,41 @@ module.exports = {
       res.status(400).send({
         message: "Theres an error",
       });
-      console.log(error);
+      console.log("ini errornya", error);
     }
   },
+
+  profilePicture: async (req, res) => {
+    const id = req.params.id; // Pastikan id diambil dari body request
+    const profilePicture = req.file;
+
+    if (!id) {
+      return res.status(400).send({ message: "User ID is required" });
+    }
+
+    if (!profilePicture) {
+      return res.status(400).send({ message: "Profile picture is required" });
+    }
+
+    try {
+      const updateProfile = await users.update(
+        { profile_picture: profilePicture.filename }, // Simpan nama file
+        { where: { id } }
+      );
+      res.status(200).send({
+        message: "Success update profile picture",
+        result: updateProfile,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: "There's an error",
+        error: error.message,
+      });
+      console.log("ini errornya", error);
+    }
+  },
+
+
 
   login: async (req, res) => {
     const { email, password } = req.body;
@@ -113,7 +145,6 @@ module.exports = {
           },
         }
       );
-    
 
       res.status(200).send({
         message: "Login Success",
@@ -124,6 +155,7 @@ module.exports = {
       res.status(400).send({
         message: "Theres an Error",
       });
+      console.log("ini errornya", error)
     }
   },
 
@@ -159,5 +191,4 @@ module.exports = {
       });
     }
   },
-
 };

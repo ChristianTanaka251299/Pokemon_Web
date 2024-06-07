@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Favorite.init(
     {
       user_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       pokemon_name: {

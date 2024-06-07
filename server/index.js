@@ -2,6 +2,7 @@ const express = require("express");
 const { Sequelize } = require("sequelize");
 const db = require("./models");
 const cors = require("cors");
+const { join } = require("path");
 const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
@@ -14,6 +15,8 @@ const sequelize = new Sequelize("pokemon_advance", "root", "password", {
 });
 app.use(express.json());
 app.use(cors());
+
+app.use("/static", express.static(join(__dirname, "./", "public")));
 app.get("/", (req, res) => {
   res.status(200).send("connected successfully");
 });
