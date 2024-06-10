@@ -129,6 +129,7 @@ module.exports = {
         id: getUser.dataValues.id,
         firstName: getUser.dataValues.first_name,
         lastName: getUser.dataValues.last_name,
+        uid: getUser.dataValues.uid,
         email: getUser.dataValues.email,
       };
 

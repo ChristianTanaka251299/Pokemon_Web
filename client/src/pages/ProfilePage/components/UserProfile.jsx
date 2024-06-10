@@ -27,8 +27,9 @@ const UserProfile = ({ userInfo }) => {
         <div className="relative h-36 w-36 overflow-hidden rounded-full bg-blue-200 lg:h-56 lg:w-56">
           <img
             src={
-              `${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}` ||
-              EmptyUser
+              userInfo.profile_picture
+                ? `${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}`
+                : EmptyUser
             }
             className="h-40 w-44 lg:h-60 lg:w-64"
           />

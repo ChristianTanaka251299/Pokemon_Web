@@ -25,9 +25,9 @@ const handleSubmitProfileImage = async (userId, reRenderFunction, closeModalFunc
     }
   };
 
-  const getUser = async (userId) => {
+  const getUser = async (userUid) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/get/${userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/get/${userUid}`);
       return response.data.result; // Assuming the user data is in response.data
     } catch (error) {
       console.error("Error fetching user data:", error);

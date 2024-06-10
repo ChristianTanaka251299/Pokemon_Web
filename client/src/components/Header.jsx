@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo/pokemon_logo.png";
 import Profile from "../assets/pokeball_profile.jpg";
+import { capitalizeFirstLetter } from"../helper/string"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -55,7 +56,7 @@ const Header = () => {
                       userInfo.first_name ? "bg-primaryBlue" : "bg-slate-300"
                     }  px-6 font-helvetica text-white lg:block`}
                   >
-                    {!userInfo.first_name ? "Guest" : userInfo.first_name}
+                    {!userInfo.first_name ? "Guest" : capitalizeFirstLetter(userInfo.first_name)}
                   </p>
                   <div className="absolute -right-3 h-9 w-9 overflow-hidden rounded-full bg-blue-600 md:relative md:right-0 lg:h-9 lg:w-9">
                     <img className="w-10 h-10" src={`${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}`} alt="profile_picture.jpg" />
@@ -71,7 +72,7 @@ const Header = () => {
                   Profile
                 </p>
               </Link>
-              <Link>
+              <Link to={"/friends"} onClick={() => setOpen(false)}>
                 <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
                   Friends
                 </p>

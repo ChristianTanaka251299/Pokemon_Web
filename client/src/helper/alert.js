@@ -18,4 +18,16 @@ function errorAlertWithMessage(message = "") {
   })
 }
 
-export { successAlert, errorAlertWithMessage };
+function warningAlertWithConfirmation() {
+  return Swal.fire({
+    title: "Do you want to remove your friend?",
+    showDenyButton: true,
+    confirmButtonText: "Yes",
+    denyButtonText: "No",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+}
+
+
+export { successAlert, errorAlertWithMessage, warningAlertWithConfirmation };

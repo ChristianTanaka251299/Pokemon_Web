@@ -4,6 +4,7 @@ const initialState = {
     id:"",
     first_name: "",
     last_name: "",
+    uid:"",
     profile_picture:"",
     refresh_token:""
 }
@@ -16,6 +17,7 @@ export const userSlice = createSlice({
             state.id = action.payload.id
             state.first_name = action.payload.firstName
             state.last_name = action.payload.lastName
+            state.uid = action.payload.uid
             state.profile_picture = action.payload.profilePicture
             state.refresh_token = action.payload.refreshToken
         },

@@ -8,6 +8,7 @@ import { successAlert } from "../../../helper/alert";
 
 const FormEdit = () => {
 const userId = useSelector((state) => state.user.id)
+const userUid = useSelector((state) => state.user.uid)
 const navigate = useNavigate()
 
   const menu = [
@@ -89,7 +90,7 @@ const navigate = useNavigate()
 
   const getCurrentUser = async () => {
     try {
-      const result = await getUser(userId);
+      const result = await getUser(userUid);
       formik.setValues({
         first_name: result?.first_name || "",
         last_name: result?.last_name || "",

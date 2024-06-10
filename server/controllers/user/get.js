@@ -27,7 +27,7 @@ module.exports = {
     try {
       const result = await users.findOne({
         where: {
-          id: userId,
+          uid: userId,
         },
       });
       res.status(200).send({

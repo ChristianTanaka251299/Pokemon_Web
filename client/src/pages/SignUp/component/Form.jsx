@@ -35,7 +35,7 @@ const Form = () => {
       console.log("ini values register", values)
       try {
         const result = await axios.post(
-          `http://localhost:8000/user/register`,
+          `${process.env.REACT_APP_BASE_URL}/user/register`,
           values,
         );
         await successAlert(result.data.message);

@@ -24,11 +24,12 @@ const Form = () => {
         const decode = await jwtDecode(result.data.token, {
           header: process.env.REACT_APP_ACCESS_TOKEN
         })
-        const getProfile = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/get/${decode.id}`)
+        const getProfile = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/get/${decode.uid}`)
         const dispatchValue = {
           id: decode.id,
           firstName: decode.firstName,
           lastName: decode.lastName,
+          uid: getProfile.data.result.uid,
           profilePicture: getProfile.data.result.profile_picture,
           refreshToken: result.data.refresh_token
         }

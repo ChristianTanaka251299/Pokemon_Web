@@ -7,6 +7,7 @@ import { closeModal } from "../../reducers/modalSlice"
 
 const ProfilePage = () => {
   const userId = useSelector((state) => state.user.id);
+  const userUid = useSelector((state) => state.user.uid)
   const showModal = useSelector( (state) => state.modal.open)
   const [userInfo, setUserInfo] = useState([]);
   const [userFav, setUserFav] = useState([]);
@@ -16,7 +17,7 @@ const ProfilePage = () => {
 
   const getUserInfo = async () => {
     const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/user/get/${userId}`,
+      `${process.env.REACT_APP_BASE_URL}/user/get/${userUid}`,
     );
     setUserInfo(result.data.result);
   };

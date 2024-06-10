@@ -7,7 +7,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 
-const { userRouters, favoriteRouters } = require("./routers");
+const { userRouters, favoriteRouters, friendRouters } = require("./routers");
 
 const sequelize = new Sequelize("pokemon_advance", "root", "password", {
   host: "localhost",
@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouters);
 app.use("/favorite", favoriteRouters);
+app.use("/friend", friendRouters)
 
 // db.sequelize.sync({ alter: true });
 
