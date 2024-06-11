@@ -1,30 +1,35 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux";
-import { handleSubmitProfileImage } from "../../../function/users"
-import { closeModal } from "../../../reducers/modalSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { handleSubmitProfileImage } from "../../../function/users";
+import { closeModal } from "../../../reducers/modalSlice";
 import dropImage from "../../../assets/drop_image.png";
 
-const DropImage = ({getUserInfo}) => {
+const DropImage = ({ getUserInfo }) => {
   const inputFileRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(dropImage);
   const [dragActive, setDragActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   const userId = useSelector((state) => state.user.id);
-  const maxFileSize = 1048576; 
-  const dispatch = useDispatch()
+  const maxFileSize = 1048576;
+  const dispatch = useDispatch();
 
-  const uploadImage = (event) => {
-    const file = event.target.files[0];
+  const handleFiles = (file) => {
     if (file) {
       if (file.size > maxFileSize) {
         setErrorMessage("Your file exceeds 1MB");
       } else {
         const imgLink = URL.createObjectURL(file);
         setImagePreview(imgLink);
-        setErrorMessage(""); // Clear the error message if the file is valid
+        setSelectedFile(file);
+        setErrorMessage("");
       }
     }
+  };
+
+  const uploadImage = (event) => {
+    const file = event.target.files[0];
+    handleFiles(file);
   };
 
   const handleDragOver = (event) => {
@@ -45,15 +50,27 @@ const DropImage = ({getUserInfo}) => {
     setDragActive(false);
 
     const file = event.dataTransfer.files[0];
-    if (file) {
-      if (file.size > maxFileSize) {
-        setErrorMessage("Your file exceeds 1MB");
-      } else {
-        const imgLink = URL.createObjectURL(file);
-        setImagePreview(imgLink);
-        setErrorMessage("");
-      }
+    handleFiles(file);
+  };
+
+  const handleSubmit = () => {
+    if (!selectedFile) {
+      setErrorMessage("Please select a picture to be uploaded");
+      return;
     }
+
+    // Manually set the file to the input element for handleSubmitProfileImage to retrieve
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(selectedFile);
+    inputFileRef.current.files = dataTransfer.files;
+
+    handleSubmitProfileImage(userId, dispatch(closeModal()), dispatch)
+      .then(() => {
+        getUserInfo();
+      })
+      .catch((error) => {
+        console.error("Error submitting profile image:", error);
+      });
   };
 
   return (
@@ -61,15 +78,12 @@ const DropImage = ({getUserInfo}) => {
       <div id="header">
         <h1 className="text-md font-bold">Please select your profile picture.</h1>
         <p className="mt-2 text-xs text-slate-600">
-          File size: maximum 1,000,000 bytes (1 Megabytes). Allowed file
-          extensions: .JPG .JPEG .PNG
+          File size: maximum 1,000,000 bytes (1 Megabyte). Allowed file extensions: .JPG .JPEG .PNG
         </p>
       </div>
       <div
         id="dropImage"
-        className={`mx-auto my-6 flex w-11/12 items-center justify-center rounded-2xl border-2 border-dashed border-slate-400 bg-blue-100/40 ${
-          dragActive ? "border-blue-600 bg-blue-200" : ""
-        }`}
+        className={`mx-auto my-6 flex w-11/12 items-center justify-center rounded-2xl border-2 border-dashed border-slate-400 bg-blue-100/40 ${dragActive ? "border-blue-600 bg-blue-200" : ""}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -84,10 +98,7 @@ const DropImage = ({getUserInfo}) => {
             onChange={uploadImage}
             hidden
           />
-          <div
-            className="flex flex-col items-center text-center"
-            id="image-view"
-          >
+          <div className="flex flex-col items-center text-center" id="image-view">
             <img className="w-1/2" src={imagePreview} alt="Uploaded Preview" />
             <p>
               Drag and drop or click here <br />
@@ -100,7 +111,11 @@ const DropImage = ({getUserInfo}) => {
           </div>
         </label>
       </div>
-      <button className="bg-primaryBlue p-4 rounded-md w-1/2 hover:bg-blue-700 transition duration-200" type="submit" onClick={() => handleSubmitProfileImage(userId, getUserInfo, dispatch(closeModal()), dispatch)}>
+      <button
+        className="bg-primaryBlue p-4 rounded-md w-1/2 hover:bg-blue-700 transition duration-200"
+        type="submit"
+        onClick={handleSubmit}
+      >
         <p className="font-helvetica text-white">Save</p>
       </button>
     </section>

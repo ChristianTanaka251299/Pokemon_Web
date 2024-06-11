@@ -1,15 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo/pokemon_logo.png";
 import Profile from "../assets/pokeball_profile.jpg";
+import { useDispatch } from "react-redux";
+import { successAlert } from "../helper/alert"
 import { capitalizeFirstLetter } from"../helper/string"
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import EmptyUser from "../assets/user_icon.jpg"
 
 const Header = () => {
   const userInfo = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const profilePicture = userInfo.profile_picture 
+  ? `${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}`
+  : EmptyUser;
+
+  const handleLogout = () => {
+    dispatch({ type: 'user/logout' });
+    setOpen(false)
+    navigate("/")
+    successAlert("Logout Success")
+    // Perform any other logout logic (e.g., redirect to login page)
+  };
   return (
     <>
       <section className="sticky top-0 z-40 bg-white drop-shadow-md">
@@ -59,7 +74,7 @@ const Header = () => {
                     {!userInfo.first_name ? "Guest" : capitalizeFirstLetter(userInfo.first_name)}
                   </p>
                   <div className="absolute -right-3 h-9 w-9 overflow-hidden rounded-full bg-blue-600 md:relative md:right-0 lg:h-9 lg:w-9">
-                    <img className="w-10 h-10" src={`${process.env.REACT_APP_AVATAR_BASE_URL}/${userInfo.profile_picture}`} alt="profile_picture.jpg" />
+                    <img className="w-10 h-10" src={profilePicture} alt="profile_picture.jpg" />
                   </div>
                 </div>
               </button>
@@ -77,7 +92,7 @@ const Header = () => {
                   Friends
                 </p>
               </Link>
-              <Link>
+              <Link onClick={() => handleLogout()} to="/">
                 <p className="mt-2 border-b pr-2 transition duration-150 hover:text-slate-300">
                   Logout
                 </p>

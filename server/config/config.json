@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "pokemon_advance",
+    "username": "sand2730_root",
+    "password": "Mercuri12#",
+    "database": "sand2730_pokemon_advance",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "password",
-    "database": "pokemon_advance",
+    "username": "sand2730_root",
+    "password": "Mercuri12#",
+    "database": "sand2730_pokemon_advance",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "pokemon_advance",
+    "username": "sand2730_root",
+    "password": "Mercuri12#",
+    "database": "sand2730_pokemon_advance",
     "host": "localhost",
     "dialect": "mysql"
   }

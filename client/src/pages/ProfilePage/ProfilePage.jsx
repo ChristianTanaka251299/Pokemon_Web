@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch,useSelector } from "react-redux";
-import { UserProfile, FavoritePokemon, DropImage } from "./components"
-import { Modal } from "../../components"
-import { closeModal } from "../../reducers/modalSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { UserProfile, FavoritePokemon, DropImage } from "./components";
+import { Modal } from "../../components";
+import { closeModal } from "../../reducers/modalSlice";
 
 const ProfilePage = () => {
   const userId = useSelector((state) => state.user.id);
-  const userUid = useSelector((state) => state.user.uid)
-  const showModal = useSelector( (state) => state.modal.open)
+  const userUid = useSelector((state) => state.user.uid);
+  const showModal = useSelector((state) => state.modal.open);
   const [userInfo, setUserInfo] = useState([]);
   const [userFav, setUserFav] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const [showModal, setShowModal] = useState(false)
   const [pokelist, setPokeList] = useState([]);
 
@@ -38,7 +38,6 @@ const ProfilePage = () => {
     }
   };
 
-  
   // const getPokeInfo = async (list) => {
   //   try {
   //     list.map(async (list) => {
@@ -61,7 +60,8 @@ const ProfilePage = () => {
     <>
       <section className="container-screen lg:w-[78%]">
         <UserProfile userInfo={userInfo} />
-        <FavoritePokemon userFav={userFav} userId={userId}/>
+
+        <FavoritePokemon userFav={userFav} userId={userId} getUserFav={getUserFav} />
       </section>
       <Modal isVisible={showModal} onClose={() => dispatch(closeModal())}>
         <DropImage getUserInfo={getUserInfo} />

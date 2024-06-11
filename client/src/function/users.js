@@ -2,7 +2,7 @@ import axios from "axios";
 import {successAlert} from "../helper/alert"
 import { editProfile } from "../reducers/userSlice"
 
-const handleSubmitProfileImage = async (userId, reRenderFunction, closeModalFunction, dispatch) => {
+const handleSubmitProfileImage = async (userId, closeModalFunction, dispatch) => {
     const profilePicture = new FormData();
     const fileInput = document.getElementById("input-file");
     if (fileInput.files.length > 0) {
@@ -15,7 +15,7 @@ const handleSubmitProfileImage = async (userId, reRenderFunction, closeModalFunc
 
         const getuserProfile = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/get/${userId}`)
         dispatch(editProfile(getuserProfile.data.result.profile_picture))
-        reRenderFunction()
+       
         closeModalFunction(false)
       } catch (error) {
         console.log(error);

@@ -69,9 +69,11 @@ const Pokemon = () => {
       const pokemonData = {
         user_id: userId,
         pokemon_name: pokemonName,
-        image: image
+        image: image,
       };
-      if (isPokemonInFav) {
+      if (!userId) {
+        navigate("/login");
+      } else if (isPokemonInFav) {
         try {
           await axios.delete(
             `${process.env.REACT_APP_BASE_URL}/favorite/delete`,
@@ -89,6 +91,7 @@ const Pokemon = () => {
             pokemonData,
           );
         } catch (error) {
+          alert("ada error");
           console.log(error);
         }
       }
@@ -158,7 +161,12 @@ const Pokemon = () => {
                       ? "text-primaryYellow"
                       : "text-white"
                   } hover:text-primaryYellow lg:w-7`}
-                  onClick={() => handleFavToggle(value.name, value?.sprites?.other["official-artwork"].front_default)}
+                  onClick={() =>
+                    handleFavToggle(
+                      value.name,
+                      value?.sprites?.other["official-artwork"].front_default,
+                    )
+                  }
                 />
               </button>
               <button onClick={() => onNavigate(value)}>
@@ -181,7 +189,12 @@ const Pokemon = () => {
                     ? "text-primaryYellow"
                     : "text-white"
                 } hover:text-primaryYellow lg:w-7`}
-                onClick={() => handleFavToggle(pokeData?.name, pokeData?.sprites?.other["official-artwork"].front_default)}
+                onClick={() =>
+                  handleFavToggle(
+                    pokeData?.name,
+                    pokeData?.sprites?.other["official-artwork"].front_default,
+                  )
+                }
               />
             </button>
             <button onClick={() => onNavigate(pokeData)}>

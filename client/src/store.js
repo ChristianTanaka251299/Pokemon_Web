@@ -1,19 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/userSlice";
-import paramReducer from "./reducers/paramSlice";
-import pokemonReducer from "./reducers/pokemonSlice";
-import modalReducer from "./reducers/modalSlice"
-import storage from "redux-persist/lib/storage"
-import { persistReducer } from "redux-persist"
-import { combineReducers } from "@reduxjs/toolkit"
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import rootReducer from "./reducers/rootReducer";
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: {
-    user: userReducer,
-    param: paramReducer,
-    pokemon: pokemonReducer,
-    modal: modalReducer
-  }
+  reducer: persistedReducer,
 });
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };
+

@@ -3,22 +3,28 @@ require("dotenv").config();
 
 module.exports = {
   verifyAccount: async (req, res) => {
-    const uid = req.params.uid;
-
+    const { uid } = req.params;
+  
     try {
-      await users.update(
-        { verify: 1 },
-        {
-          where: {
-            uid,
-          },
-        }
-      );
-      res.status(200).send({
-        message: "Success verify user",
+      const user = await users.findOne({
+        where: {
+          uid: parseInt(uid),
+        },
       });
+  
+      if (user) {
+        await user.update({ verify: true });
+        res.redirect(`${process.env.FRONTEND}/login`);
+      } else {
+        res.status(404).send({
+          message: 'User not found',
+        });
+      }
     } catch (error) {
-      res.status(400).send(error);
+      res.status(500).send({
+        message: 'Internal Server Error',
+      });
+      console.log('Verification Error:', error);
     }
   },
 
